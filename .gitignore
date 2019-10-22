@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# JWT config
+jwtConfig.js*
+
 # Runtime data
 pids
 *.pid
