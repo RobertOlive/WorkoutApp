@@ -2,9 +2,16 @@
   "name": "workoutapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'workoutapp/*'\" \"npm run workoutapp\"",
+    "workoutapp": "cd workoutapp && npm run start",
+    "install": "cd workoutapp && npm install",
+    "build": "cd workoutapp && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +24,14 @@
   },
   "homepage": "https://github.com/RobertOlive/WorkoutApp#readme",
   "dependencies": {
-    "create-react-app": "^3.2.0"
+    "axios": "^0.19.0",
+    "create-react-app": "^3.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^1.7.0",
+    "sequelize": "^5.21.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
   }
 }
