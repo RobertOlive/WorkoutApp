@@ -5,6 +5,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
+var db = require("../models");
 
 passport.use(
   'register',
@@ -16,11 +17,12 @@ passport.use(
       session: false,
     },
     (req, username, password, done) => {
+        console.log(req.body);
       console.log(username);
       console.log(req.body.email);
 
       try {
-        User.findOne({"username": username 
+        db.User.findOne({"username": username 
         }).then(user => {
           if (user != null) {
             console.log('username or email already taken');
@@ -29,7 +31,7 @@ passport.use(
             });
           }
           bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-            User.create({
+            db.User.create({
               username,
               password: hashedPassword,
               email: req.body.email,
@@ -56,7 +58,7 @@ passport.use(
     },
     (username, password, done) => {
       try {
-        User.findOne({"username": username}).then(user => {
+        db.User.findOne({"username": username}).then(user => {
           if (user === null) {
             return done(null, false, { message: 'bad username' });
           }
@@ -87,7 +89,7 @@ passport.use("google",
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
       console.log("done"+ done)
-      User.findOne({ googleId: profile.id }).then(existingUser => {
+      db.User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
           console.log("found user");
           return done(null, existingUser)
