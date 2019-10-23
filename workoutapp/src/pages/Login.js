@@ -16,7 +16,7 @@ export default class Login extends Component {
                 username: this.state.username,
                 password: this.state.password,
             }).then((res)=>{
-                console.log(res);
+                localStorage.setItem('JWT', res.data.token);
                 this.props.loginHandle(this.state.username);
                 this.props.history.push('/');
             })
@@ -35,7 +35,7 @@ export default class Login extends Component {
                 </div>
                 <form>
                     <input name="username" placeholder="username" onChange={this.handleForm} value={this.state.username}/>
-                    <input type="password" name="password" placeholder="password"placeholder="username" onChange={this.handleForm} value={this.state.password}/>
+                    <input type="password" name="password" placeholder="password" onChange={this.handleForm} value={this.state.password}/>
                 </form>
                 <button onClick={this.loginSubmit}>Click here to log in</button>
                 <Link to="/signup">New User? Sign up here.</Link>

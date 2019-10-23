@@ -20,7 +20,7 @@ export default class Login extends Component {
                 password: this.state.password,
                 email: this.state.email
             }).then((res)=>{
-                console.log(res);
+                localStorage.setItem('JWT', res.data.token);
                 this.props.loginHandle(this.state.username);
                 this.props.history.push('/');
             })

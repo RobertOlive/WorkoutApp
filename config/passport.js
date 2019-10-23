@@ -22,8 +22,8 @@ passport.use(
       console.log(req.body.email);
 
       try {
-        db.User.findOne({"username": username 
-        }).then(user => {
+        db.User.findOne({where:{"username": username 
+        }}).then(user => {
           if (user != null) {
             console.log('username or email already taken');
             return done(null, false, {
@@ -58,7 +58,7 @@ passport.use(
     },
     (username, password, done) => {
       try {
-        db.User.findOne({"username": username}).then(user => {
+        db.User.findOne({where:{"username": username}}).then(user => {
           if (user === null) {
             return done(null, false, { message: 'bad username' });
           }

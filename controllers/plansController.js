@@ -1,3 +1,5 @@
+var db = require("../models");
+
 module.exports ={
     doAThing: (req, res)=> {
         console.log("doing a thing");
