@@ -7,12 +7,12 @@ import Signup from "./pages/Signup";
 
 class App extends Component {
   state={
-    user:"",
+    id:"",
     loggedIn: false
   }
 
-  loginHandle=(user)=>{
-    this.setState({user: user, loggedIn:true})
+  loginHandle=(id)=>{
+    this.setState({id: id, loggedIn:true})
   }
 
   render() {
@@ -20,10 +20,10 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           <Switch>
-            <Route exact path="/" render={()=>this.state.loggedIn?<Redirect to="/dashboard"/>:<Redirect to="/login"/>}/>
-            <Route exact path="/dashboard" render={props=><Dashboard {...props}/>}/>
+            <Route exact path="/dashboard" render={props=>this.state.loggedIn?<Dashboard {...props}/>:<Redirect to="/login"/>}/>
             <Route exact path="/login" render={props=><Login loginHandle={this.loginHandle}{...props}/>}/>
             <Route exact path="/signup" render={props=><Signup loginHandle={this.loginHandle}{...props}/>}/>
+            <Route render={()=>this.state.loggedIn?<Redirect to="/dashboard"/>:<Redirect to="/login"/>}/>
           </Switch>
         </div>
       </BrowserRouter>

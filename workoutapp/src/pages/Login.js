@@ -12,14 +12,17 @@ export default class Login extends Component {
     }
 
     loginSubmit = () => {
+        if (this.state.username.length>0 && this.state.password.length>0) {
             axios.post("/loginUser", {
                 username: this.state.username,
                 password: this.state.password,
             }).then((res)=>{
+                console.log(res);
                 localStorage.setItem('JWT', res.data.token);
-                this.props.loginHandle(this.state.username);
+                this.props.loginHandle(res.data.userId);
                 this.props.history.push('/');
             })
+        }
     }
 
     handleForm = e => {
