@@ -6,16 +6,13 @@ module.exports ={
         res.status(200).json({object:"thing"})
     },
     getDays: (req, res)=> {
-        var query = {};
-        if (req.query.author_id) {
-          query.AuthorId = req.query.author_id;
-        }
+
         // Here we add an "include" property to our options in our findAll query
         // We set the value to an array of the models we want to include in a left outer join
         // In this case, just db.Author
         db.Day.findAll({
-          where: query,
-          include: [db.User]
+          where: {UserId:req.params.id},
+        //   include: [db.User]
         }).then(days=> {
           res.json(days);
         });

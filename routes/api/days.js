@@ -4,16 +4,14 @@ const jwt = require("jsonwebtoken");
 const jwtVerify = require("../../config/jwt");
 
 // Matches with "/api/days"
-router.route("/")
-  .get(dayController.doAThing)
-  // .get(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.findAll)
-//   .post(dayController.create);
+// router.route("/")
+//   .get(dayController.doAThing)
 
 // Matches with "/api/days/:id"
 router.route("/:id")
-  .get(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.getDays)
+  // .get(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.getDays)
+  .get(dayController.getDays)
+  // .post(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.createDay)
   .post(dayController.createDay)
-//   .put(dayController.update)
-//   .delete(dayController.remove);
 
 module.exports = router;
