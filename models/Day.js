@@ -1,7 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
     var Day = sequelize.define("Day", {
         // Giving the Day model a name of type STRING
-        dayName: DataTypes.STRING
+        dayName: DataTypes.STRING,
+        weekDay: DataTypes.STRING
     });
   
     Day.associate = function(models) {

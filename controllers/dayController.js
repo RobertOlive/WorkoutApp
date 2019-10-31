@@ -2,7 +2,6 @@ var db = require("../models");
 
 module.exports ={
     getDays: (req, res)=> {
-
         // Here we add an "include" property to our options in our findAll query
         // We set the value to an array of the models we want to include in a left outer join
         // In this case, just db.Author
@@ -15,9 +14,16 @@ module.exports ={
     },
     createDay: (req, res)=> {
         console.log(req.body)
-        db.Day.create({dayName: req.body.dayName, UserId: req.params.id}).then(day=> {
+        db.Day.create({dayName: req.body.dayName, weekDay: req.body.weekDay, UserId: req.params.id}).then(day=> {
             res.json(day);
         });
+    },
+    updateDay: (req, res)=> {
+        db.Day.update(req.body, {
+            where:{id: req.body.id}
+        }).then(day=> {
+            res.json(day)
+        })
     },
 
 
@@ -35,6 +41,7 @@ module.exports ={
             res.json(date);
         })
     },
+    
 
     getExercises: (req,res)=> {
         db.Exercise.findAll({
@@ -59,8 +66,7 @@ module.exports ={
     },
     updateExercise: (req, res)=>{
         db.Exercise.update(req.body, {
-            where:{id: req.body.id},
-            returning:true
+            where:{id: req.body.id}
         }).then(exercise=>{
             res.json(exercise);
         })

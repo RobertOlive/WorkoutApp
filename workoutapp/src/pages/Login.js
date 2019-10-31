@@ -11,6 +11,14 @@ export default class Login extends Component {
         };
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('userId')) {
+          console.log("hi")
+          this.props.loginHandle(localStorage.getItem('userId'))
+          this.props.history.push('/');
+        }
+    }
+
     loginSubmit = () => {
         if (this.state.username.length>0 && this.state.password.length>0) {
             axios.post("/loginUser", {
@@ -18,6 +26,7 @@ export default class Login extends Component {
                 password: this.state.password,
             }).then((res)=>{
                 console.log(res);
+                localStorage.setItem('userId', res.data.userId)
                 localStorage.setItem('JWT', res.data.token);
                 this.props.loginHandle(res.data.userId);
                 this.props.history.push('/');

@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const jwtVerify = require("../../config/jwt");
 
 // Matches with "/api/days"
-// router.route("/")
-//   .get(dayController.doAThing)
+router.route("/")
+  .put(dayController.updateDay)
 
 // Matches with "/api/days/:id"
 router.route("/:id")

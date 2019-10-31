@@ -6,9 +6,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 class App extends Component {
-  state={
-    id:"",
-    loggedIn: false
+  constructor(props) {
+    super(props);
+    this.state={
+      id:"",
+      loggedIn: false
+    }
   }
 
   loginHandle=(id)=>{
@@ -20,7 +23,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           <Switch>
-            <Route exact path="/dashboard" render={props=>this.state.loggedIn?<Dashboard {...props}/>:<Redirect to="/login"/>}/>
+            <Route exact path="/dashboard" render={props=>this.state.loggedIn?<Dashboard {...props} id={this.state.id}/>:<Redirect to="/login"/>}/>
             <Route exact path="/login" render={props=><Login loginHandle={this.loginHandle}{...props}/>}/>
             <Route exact path="/signup" render={props=><Signup loginHandle={this.loginHandle}{...props}/>}/>
             <Route render={()=>this.state.loggedIn?<Redirect to="/dashboard"/>:<Redirect to="/login"/>}/>
