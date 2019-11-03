@@ -12,7 +12,7 @@ export default class Carousel extends Component {
         console.log(plan);
         return (
             <div className="carousel">
-                {plan.length>0?plan.map(day=>{
+                {plan.length>0 ? plan.map(day=>{
                     return <CarouselComp key={day.dayName}>{day.dayName}</CarouselComp>
                 }):"Loading plan..."}
             </div>
