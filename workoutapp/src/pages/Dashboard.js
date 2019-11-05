@@ -13,8 +13,22 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount(){
+        this.getDays()
+    }
+
+    getDays = ()=> {
         axios.get(`/api/days/${this.props.id}`).then(res=>{
             this.setState({plan: res.data});
+        })
+    }
+
+    addDayHandler = (dayName, weekDay)=> {
+        axios.post(`/api/days/${this.props.id}`,{
+            dayName: dayName,
+            weekDay: weekDay
+        }).then(res=> {
+            console.log(res);
+            this.getDays()
         })
     }
 
@@ -22,7 +36,7 @@ export default class Dashboard extends Component {
         let date = this.state.date
         let day = new Intl.DateTimeFormat('en-US', {weekday:"long"}).format(date)
         let month = new Intl.DateTimeFormat('en-US', {month:"long"}).format(date)
-        let currentWorkout="Loading..."
+        let currentWorkout="No Current Workouts"
         let plan = this.state.plan
 
         if(plan.length>0) {
@@ -40,7 +54,7 @@ export default class Dashboard extends Component {
                     <h1>{`Today is ${day}, ${month} ${date.getDate()}, ${date.getFullYear()}.`}</h1>
                     <h1>{currentWorkout}</h1>
                 </div>
-                <Carousel plan={this.state.plan}/>
+                <Carousel plan={this.state.plan} addDayHandler={this.addDayHandler}/>
             </div>
         )
     }

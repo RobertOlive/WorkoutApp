@@ -17,16 +17,16 @@ const db = require("./models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use('*', function(req, res, next) {
-//   //replace localhost:8080 to the ip address:port of your server
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3001");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   res.header('Access-Control-Allow-Headers', 'Content-Type');
-//   res.header('Access-Control-Allow-Credentials', true);
-//   next(); 
-//   });
+app.use('*', function(req, res, next) {
+  //replace localhost:8080 to the ip address:port of your server
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  next(); 
+  });
 
-//   app.options('*', cors());
+  app.options('*', cors());
 
 
 // Serve up static assets (usually on heroku)
