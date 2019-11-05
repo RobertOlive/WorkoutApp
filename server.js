@@ -50,6 +50,7 @@ app.post('/registerUser', (req, res, next) => {
 });
 
 app.post('/loginUser', (req, res, next) => {
+  console.log(req.headers);
   passport.authenticate('login', (err, users, info) => {
     if (err) {
       console.error(`error ${err}`);

@@ -20,11 +20,12 @@ export default class Login extends Component {
     }
 
     loginSubmit = () => {
+        const accessString = localStorage.getItem('JWT');
         if (this.state.username.length>0 && this.state.password.length>0) {
             axios.post("/loginUser", {
                 username: this.state.username,
                 password: this.state.password,
-            }).then((res)=>{
+            },{headers: { Authorization: `JWT ${accessString}` }}).then((res)=>{
                 console.log(res);
                 localStorage.setItem('userId', res.data.userId)
                 localStorage.setItem('JWT', res.data.token);

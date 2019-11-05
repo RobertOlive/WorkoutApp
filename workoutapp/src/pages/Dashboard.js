@@ -23,10 +23,11 @@ export default class Dashboard extends Component {
     }
 
     addDayHandler = (dayName, weekDay)=> {
+        const accessString = localStorage.getItem('JWT');
         axios.post(`/api/days/${this.props.id}`,{
             dayName: dayName,
             weekDay: weekDay
-        }).then(res=> {
+        }, {headers: {Authorization:`JWT ${accessString}`}}).then(res=> {
             console.log(res);
             this.getDays()
         })

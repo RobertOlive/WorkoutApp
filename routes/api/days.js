@@ -9,8 +9,8 @@ router.route("/")
 
 // Matches with "/api/days/:id"
 router.route("/:id")
-  // .get(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.getDays)
-  .get(dayController.getDays)
+  .get(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.getDays)
+  // .get(dayController.getDays)
   // .post(jwtVerify.confirmToken, jwtVerify.verifyToken, dayController.createDay)
   .post(dayController.createDay)
 
