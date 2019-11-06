@@ -17,7 +17,8 @@ export default class Dashboard extends Component {
     }
 
     getDays = ()=> {
-        axios.get(`/api/days/${this.props.id}`).then(res=>{
+        const accessString = localStorage.getItem('JWT');
+        axios.get(`/api/days/${this.props.id}`, {headers: {Authorization:`JWT ${accessString}`}}).then(res=>{
             this.setState({plan: res.data});
         })
     }
