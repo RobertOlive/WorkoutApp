@@ -1,2 +1,2 @@
 # WorkoutApp
-An app for me and my friends 😁
+An app for me 😁
